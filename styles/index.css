@@ -13,10 +13,11 @@ html, body {
 .header { 
     position: relative;
     background: #FFFFF6;
-    background-image: url('/video/banner.gif'); /* Đường dẫn đến hình ảnh */
+    background-image: url('/video/bannerbg.gif'); /* Đường dẫn đến hình ảnh */
     background-size: contain; /* Hiển thị toàn bộ ảnh mà không cắt */
     background-repeat: repeat-x; /* Lặp lại theo chiều ngang */
     background-position: center top; /* Căn giữa ảnh theo chiều ngang và nằm trên cùng */
+    z-index: 5;
 }
 #container {
     display: flex;
@@ -163,10 +164,11 @@ audio {
         height: 10vh;
         position: relative;
         background: #FFFFF6;
-        background-image: url('/video/banner.gif'); /* Đường dẫn đến hình ảnh */
+        background-image: url('/video/bannerbg.gif'); /* Đường dẫn đến hình ảnh */
         background-size: contain; /* Hiển thị toàn bộ ảnh mà không cắt */
         background-repeat: repeat-x; /* Lặp lại theo chiều ngang */
         background-position: center top; /* Căn giữa ảnh theo chiều ngang và nằm trên cùng */
+        z-index: 5;
     }
     #container {
         height: calc(var(--vh, 1vh) * 92);
@@ -184,10 +186,11 @@ audio {
         max-height: 500px;
         position: relative;
         background: #FFFFF6;
-        background-image: url('/video/banner.gif'); /* Đường dẫn đến hình ảnh */
+        background-image: url('/video/bannerbg.gif'); /* Đường dẫn đến hình ảnh */
         background-size: contain; /* Hiển thị toàn bộ ảnh mà không cắt */
         background-repeat: repeat-x; /* Lặp lại theo chiều ngang */
         background-position: center top; /* Căn giữa ảnh theo chiều ngang và nằm trên cùng */
+        z-index: 5;
     }
     #container {
         height: 80vh;
