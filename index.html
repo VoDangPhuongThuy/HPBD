@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Web</title>
+    <link rel="stylesheet" href="styles/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&family=Protest+Riot&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Borel&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <div class="header">
+        
+    </div>
+    <audio id="background-audio" autoplay loop>
+        <source src="pianochill.mp3" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="container">
+        <div id="welcome">
+            <h1>Web này dành cho chị HPA <3</h1>
+            <button id="startBtn">Let's enjoy <span>&#8594;</span> </button>
+        </div>
+        <h2 class="title-container" id="title-container">Rate những việc chị PA làm ^~^ </h2>
+        <div class="slider-container" id="slider-container">
+            <div class="image-container">
+                <img src="images/StealPenguin.jpg" alt="image1">
+                <img src="images/PABullyPT.jpg" alt="image2" style="display:none">
+                <img src="images/BathroomWar.jpg" alt="image3" style="display:none">
+                <img src="images/PA.jpg" alt="image4" style="display:none">
+                <img src="images/PASleep.jpg" alt="image5" style="display:none">
+                <img src="images/p113.jpg" alt="image6" style="display:none">
+            </div>
+            <div class="content-container">
+                <h2 id="content1">Ăn cắp cánh cụt công khai 5/10 nha</h2>
+                <h2 id="content2" style="display:none">Bully bạn cùng phòng 0/10 qá tệk</h2>
+                <h2 id="content3" style="display:none">Dành nhà tắm với roomate mặc dù đến sau -oo/+oo</h2>
+                <h2 id="content4" style="display:none">Là ngừi trong phòng chịu quay tiktok nhảy chung dới PT mặc dù mắc cỡ dữ. Muốn đi đâu chơi mà cổ rảnh cổ đi chung liền 10/10</h2>
+                <h2 id="content5" style="display:none">Hay chụp hình roomate lúc ngủ 10/100 :)</h2>
+                <h2 id="content6" style="display:none">Lun quan tâm giúp đỡ mn trong phòng. Nhiệt tình vui vẻ đẹp gái trúa hề... 10 tỷ điểm</h2>
+            </div>
+            <div class="control-container">
+                <i class="fas fa-chevron-circle-right" id="nextBtn"></i>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    // Tính toán chiều cao thực sự của viewport
+    function setViewportHeight() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty('--vh', `${vh}px`);
+    }
+
+    // Gọi hàm khi tải trang và khi thay đổi kích thước cửa sổ
+    window.addEventListener('load', setViewportHeight);
+    window.addEventListener('resize', setViewportHeight);
+
+    const colors = ['#F8DA9E', '#FFB7B2', '#FFDAC1', '#B5EAD7', '#C7CEEA', '#B8E1FF'];
+    const container = document.getElementById('container');
+
+    function createRibbon() {
+        const ribbon = document.createElement('div');
+        ribbon.classList.add('ribbon');
+        ribbon.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        ribbon.style.left = Math.random() * 100 + 'vw';
+        ribbon.style.top = '10vh';
+        ribbon.style.width = 10 + 'px';
+        ribbon.style.height = Math.random() * 60 + 40 + 'px';
+        ribbon.style.animationDuration = Math.random() * 3 + 4 + 's';
+        container.appendChild(ribbon);
+
+        setTimeout(() => {
+            ribbon.remove();
+        }, 5000);
+    }
+
+    ribbonInterval = setInterval(createRibbon, 200);
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    const startBtn = document.getElementById('startBtn');
+    startBtn.addEventListener("click", () => {
+        // Xóa hiệu ứng ruy băng
+        clearInterval(ribbonInterval);
+        const ribbons = document.querySelectorAll('.ribbon');
+        ribbons.forEach(ribbon => ribbon.remove());
+        // Xóa welcome
+        const welcome = document.getElementById('welcome');
+        welcome.remove();
+        // Hiện slider-container
+        const container = document.getElementById('container');
+        container.style.display = 'block';
+        const title = document.getElementById('title-container');
+        title.style.display = 'block';
+        const slider = document.getElementById('slider-container');
+        slider.style.display = 'block';
+    });
+
+    ///////////////////////////////////////////////////////////////////////////////////
+    let curSlide = 1;
+    const nextBtn = document.getElementById('nextBtn');
+    // Lấy số lượng slide tương ứng số lượng ảnh
+    const imageContainer = document.querySelector('.image-container');
+    const imageCount = imageContainer.querySelectorAll('img').length;
+    nextBtn.addEventListener("click", () =>{
+        if (curSlide == imageCount){ // chuyển sang phần khác
+            window.location.href = 'gift.html';
+        }
+        else{ // chuyển slide kế
+            // Ẩn slide hiện tại
+            let curImg = document.querySelector(`img[alt="image${curSlide}"]`);
+            curImg.style.display = 'none';
+            let curContent = document.getElementById(`content${curSlide}`);
+            curContent.style.display = 'none';
+            // Hiện slide kế
+            curSlide++;
+            curImg = document.querySelector(`img[alt="image${curSlide}"]`);
+            curImg.style.display = 'block';
+            curContent = document.getElementById(`content${curSlide}`);
+            curContent.style.display = 'block';
+        }
+
+    });
+
+    // Kiểm tra nếu âm thanh không phát, thêm sự kiện chạm để phát
+    document.addEventListener('DOMContentLoaded', function() {
+        const audio = document.getElementById('background-audio');
+
+        if (audio.paused) {
+            // Thêm sự kiện click hoặc touchstart để phát âm thanh
+            document.addEventListener('click', playAudio);
+            document.addEventListener('touchstart', playAudio);
+
+            function playAudio() {
+                audio.play();
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+            }
+        }
+    });
+</script>
+</html>

@@ -1,0 +1,210 @@
+body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+.container{
+    position: relative;
+    height: 100vh; /* Đảm bảo container chiếm toàn bộ chiều cao của màn hình */
+    width: 100%;
+    background: linear-gradient(to bottom, #112D60, #353A5F);
+    overflow: hidden;
+}
+.star {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: white;
+}
+.item{
+    position: absolute;
+    text-align: center;
+}
+.item-words{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    overflow: hidden;
+    width: 50%;
+    max-width: 360px;
+    z-index: 2;
+}
+.item-words img{
+    width: 100%; /* Hình ảnh phủ lên toàn bộ item-words */
+    height: auto; /* Giữ nguyên tỉ lệ */
+    max-width: 100%; /* Đảm bảo không vượt quá chiều rộng của item-words */
+    z-index: 2;
+}
+.item-cake{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    max-width: 250px;
+    height: 50%;
+    max-height: 250px;
+    z-index: 2;
+}
+.item-cake img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+.candle {
+    width: 15px; /* Chiều rộng của nến */
+    height: 60px; /* Chiều cao của nến */
+    background-color: yellow; /* Màu vàng cho nến */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+.flame {
+    width: 10px;
+    height: 20px;
+    background: radial-gradient(circle at 50% 50%, #FFA500, #FF4500);
+    border-radius: 50% 50% 0 0;
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: flicker 0.1s infinite alternate;
+    z-index: 2;
+}
+@keyframes flicker {
+    0% {
+        transform: translate(-50%, -5%);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, 5%);
+        opacity: 0.8;
+    }
+}
+.flame.blown-out {
+    animation: none;
+    background: none;
+    box-shadow: none;
+    opacity: 0;
+}
+.item-box{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 500px;
+    height: 20%;
+    max-height: 280px;
+    z-index: 4;
+}
+.wish-box {
+    width: 90%;
+    height: 50%;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    font-size: 16px;
+    resize: vertical; /* Cho phép chỉnh sửa kích thước theo chiều dọc */
+    min-height: 100px; /* Độ cao tối thiểu của textarea */
+    z-index: 4;
+}
+
+.blow-out-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+#blowBtn {
+    border: none;
+    padding: 12px 24px;
+    background-color: #E98D9E;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 300;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 25px; /* Độ cong của góc */
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 10px;
+}
+
+.item-cat{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    max-width: 250px;
+    height: 30%;
+    max-height: 250px;
+    z-index: 2;
+}
+.item-cat img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+.item-dog{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    max-width: 250px;
+    height: 30%;
+    max-height: 250px;
+    z-index: 2;
+}
+.item-dog img{
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+.item-circlestar-left{
+    position: absolute;
+    left: 0;
+    width: 25%;
+    max-width: 300px;
+    height: 100%;
+    z-index: 3;
+}
+.item-circlestar-left img{
+    object-fit: cover;
+    width: 100%;
+    z-index: 3;
+}
+.item-circlestar-right{
+    position: absolute;
+    right: 0;
+    width: 25%;
+    max-width: 300px;
+    height: 100%;
+    z-index: 3;
+}
+.item-circlestar-right img{
+    object-fit: cover;
+    width: 100%;
+    z-index: 3;
+}
+.wish-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 50%;
+    max-width: 300px;
+    transform: translate(-50%, -50%);
+    background: rgba(233, 141, 158, 0.9);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 1000;
+}

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <link rel="stylesheet" href="styles/cake.css">
+    <title>Bánh Kem Sinh Nhật</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        @media (max-width: 768px) { /* Thiết bị di động */
+            .item-words {
+                top: 12%;
+            }
+            .item-cake{
+                top: 25%;
+            }
+            .candle{
+                top: 0;
+            }
+            .item-box {
+                top: 60%;
+            }
+        }
+        @media (min-width: 769px) { /* Thiết bị khác */
+            .item-words {
+                top: 20px;
+            }
+            .item-cake{
+                top: 30%;
+            }
+            .candle{
+                top: -10%;
+            }
+            .item-box {
+                top: 75%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-audio" autoplay loop>
+        <source src="Piano1.mp3" type="audio/wav">
+        Your browser does not support the audio element.
+    </audio>
+    <div id="container" class="container">
+        <div class="item item-words">
+            <img  src="video\words.gif" alt="hpbdImg">
+        </div>
+
+        <div class="item item-cake">
+            <img src="images/cake.png" alt="cakeImg">
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+
+        <div class="item item-box">
+            <textarea class="wish-box" id="wish-box" placeholder="Chị có thể nhập điều ước ở đây nhé. Yên tâm vì em không đọc được đâu ~.~"></textarea>
+            <button id="blowBtn">Thổi nến</button>
+        </div>
+        <div class="item item-cat">
+            <img src="video\cat.gif" alt="">
+        </div>
+        <div class="item item-dog">
+            <img src="video\dog.gif" alt="">
+        </div>
+        <div class="item item-circlestar-left" id="item-circlestar-left">
+            <img id="img-circlestar-left" src="video\circlestar.gif" alt="">
+        </div>
+        <div class="item item-circlestar-right" id="item-circlestar-right">
+            <img id="img-circlestar-right" src="video\circlestar.gif" alt="">
+        </div>
+
+        <div id="wishContainer" class="wish-container">
+            <p id="wishText">Chúc chị sinh nhật vui vẻ và hạnh phúc! Mong mọi điều ước của chị sẽ thành hiện thực.</p>
+        </div>
+    </div>
+</body>
+<script>
+    function createStars(containerId, numStars) {
+        const container = document.getElementById(containerId);
+        const containerWidth = container.clientWidth;
+        const containerHeight = container.clientHeight;
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.top = `${Math.random() * containerHeight}px`;
+            star.style.left = `${Math.random() * containerWidth}px`;
+            container.appendChild(star);
+        }
+    }
+    createStars('container', 70);
+
+    document.getElementById('blowBtn').addEventListener('click', function() {
+        document.querySelector('.flame').classList.add('blown-out');
+        var wishTextarea = document.getElementById('wish-box');
+        wishTextarea.value = '';
+
+        const audio = document.getElementById('background-audio');
+        const wishContainer = document.getElementById('wishContainer');
+        setTimeout(() => {
+            wishContainer.style.display = 'block';
+            audio.pause();
+        }, 1000);
+    });
+
+    function repeatImage(containerId, imageId) {
+            const container = document.getElementById(containerId);
+            const img = document.getElementById(imageId);
+            img.onload = function() {
+            const imgHeight = img.naturalHeight;
+            const imgWidth = img.naturalWidth;
+            const containerHeight = container.clientHeight;
+            const containerWidth = container.clientWidth;
+            
+            // Calculate the aspect ratio
+            const imgAspectRatio = imgWidth / imgHeight;
+            const containerAspectRatio = containerWidth / containerHeight;
+
+            // Set the initial height and width to cover the container
+            if (imgAspectRatio < containerAspectRatio) {
+                img.style.height = '100%';
+                img.style.width = 'auto';
+            } else {
+                img.style.width = '100%';
+                img.style.height = 'auto';
+            }
+
+            // Calculate how many times the image needs to be repeated vertically
+            const verticalRepeats = Math.ceil(containerHeight / img.clientHeight);
+
+            // Calculate how many times the image needs to be repeated horizontally
+            const horizontalRepeats = Math.ceil(containerWidth / img.clientWidth);
+
+            for (let i = 0; i < verticalRepeats; i++) {
+                for (let j = 0; j < horizontalRepeats; j++) {
+                    if (i === 0 && j === 0) continue; // Skip the original image
+                    const clone = img.cloneNode();
+                    clone.style.top = `${i * img.clientHeight}px`;
+                    clone.style.left = `${j * img.clientWidth}px`;
+                    container.appendChild(clone);
+                }
+            }
+        };
+    }
+    repeatImage('item-circlestar-left', 'img-circlestar-left');
+    repeatImage('item-circlestar-right', 'img-circlestar-right');
+
+    // Kiểm tra nếu âm thanh không phát, thêm sự kiện chạm để phát
+    document.addEventListener('DOMContentLoaded', function() {
+        const audio = document.getElementById('background-audio');
+        if (audio.paused) {
+            // Thêm sự kiện click hoặc touchstart để phát âm thanh
+            document.addEventListener('click', playAudio);
+            document.addEventListener('touchstart', playAudio);
+
+            function playAudio() {
+                audio.play();
+                document.removeEventListener('click', playAudio);
+                document.removeEventListener('touchstart', playAudio);
+            }
+        }
+    });
+</script>
+</html>
